@@ -103,7 +103,7 @@ for i in range(0,I_copy.shape[0]):
     image1[i,j] = 255;
 
 
-
+st.image(image1)
 #Storing all the line endpoints in a tuple
 Line = [];
 i = 1;
@@ -154,7 +154,7 @@ for i in range(0,(len(contours))):
       Line.append((left,right));
 
 
-st.image(image1);
+st.image(image1)
 
 
 
