@@ -21,8 +21,8 @@ slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.2","0
 slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
 
 st.sidebar.write("""#### Output Values""")
-st.sidebar.write("Obtained threshold: ", otsu_threshold)
-st.sidebar.write("Number of Contours found = ",str(len(contours)))
+
+
 
 
 # Making the user choose the image to convert
@@ -69,7 +69,7 @@ otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
 )
 
-
+st.sidebar.write("Obtained threshold: ", otsu_threshold)
 
 with row2_3:
     st.write("**Image After Thresholding Operation**")
@@ -130,7 +130,7 @@ contours,hierarchy = cv2.findContours(I_copy, cv2.RETR_TREE, cv2.CHAIN_APPROX_SI
 
 
 # st.write("Number of Contours found = ",str(len(contours)))
-
+st.sidebar.write("Number of Contours found = ",str(len(contours)))
 st.image(I_copy)
 
 image1 = np.zeros((I_copy.shape));
