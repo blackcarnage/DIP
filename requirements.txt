@@ -4,6 +4,6 @@ matplotlib
 scipy
 opencv-python-headless==4.6.0.66
 tensorflow==2.8.0
-pandas==1.0.1
+pandas
 
 
