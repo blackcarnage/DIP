@@ -192,7 +192,7 @@ for i in range(0,(len(contours))):
 
 with row3_2:
     st.write("**Digital Image Without Vertices**")
-    st.image(image1)
+    st.image(image1,width = 300)
 
 #############################################################################
 from itertools import combinations 
