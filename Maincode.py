@@ -16,18 +16,10 @@ st.title("Digital Image Processing")
 st.header("End Semester Project")
 
 st.sidebar.write("""#### Choose your Parameters""")
-def user_input_features():
-    slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
-    slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
-    
+slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
+slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
 
 
-    user_data = {'s0': slider0,
-                 's1': slider1}
-    features = pd.DataFrame(user_data, index=[0])
-    return features
-
-df_user = user_input_features()
 
 
 # Making the user choose the image to convert
@@ -47,9 +39,7 @@ st.image(I,width=200);
 # st.write(slider0)
 
 
-scale_factor = df_user['s0'][0];\
-st.write(df_user['s0'][0]);
-# scale_factor = ;
+scale_factor = float(slider0);
 W = int(I.shape[1]*scale_factor);
 H = int(I.shape[0]*scale_factor);
 dimensions = (W,H);
@@ -60,9 +50,8 @@ st.image(re_I,width=200);
 
 # Helps in the smoothning out of the background lines
 
-# slider1 = st.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
-# st.write(slider1)
-I_blur = cv2.medianBlur(re_I,df_user['s1'][0])
+
+I_blur = cv2.medianBlur(re_I,slider1)
          
 otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
