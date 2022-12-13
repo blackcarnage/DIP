@@ -51,7 +51,7 @@ st.image(re_I,width=200);
 # Helps in the smoothning out of the background lines
 
 
-I_blur = cv2.medianBlur(re_I,slider1)
+I_blur = cv2.medianBlur(re_I,int(slider1))
          
 otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
