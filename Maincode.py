@@ -134,16 +134,17 @@ contours,hierarchy = cv2.findContours(I_copy, cv2.RETR_TREE, cv2.CHAIN_APPROX_SI
 st.sidebar.write("Number of Contours found = ",str(len(contours)))
 # st.image(I_copy)
 
-image1 = np.zeros((I_copy.shape));
+image1 = np.zeros((I_copy.shape,3));
 #We change the image into a white background by setting all intensity values as 255
 for i in range(0,I_copy.shape[0]):
   for j in range(0,I_copy.shape[1]):
-    image1[i,j] = 1;
+    for k in range(0,3):
+        image1[i,j,k] = 1;
 
 
 colour = {"Red":[255,0,0],"Blue":[0,0,255],"Green":[0,255,0],"Black":[0,0,0]}
-col = [1,0,0]
-st.write(col)
+col = colour[slider2]
+
 
 #Storing all the line endpoints in a tuple
 Line = [];
