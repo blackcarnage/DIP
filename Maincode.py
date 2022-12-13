@@ -265,9 +265,9 @@ for index in val:
 
   
 
-with row3_2:
+with row3_3:
     st.write("**Final Image**")
-    st.image(image1)
+    st.image(image1,width = 300)
 
 
 
