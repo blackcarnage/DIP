@@ -154,7 +154,7 @@ for i in range(0,(len(contours))):
       Line.append((left,right));
 
 
-st.image(image1)
+st.image(image1);
 
 
 
