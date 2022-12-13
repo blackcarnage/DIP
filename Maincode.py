@@ -11,12 +11,15 @@ import scipy
 
 
 
-
+#App headings
 st.title("Digital Image Processing")
 st.header("End Semester Project")
 
-img = Image.open("a.jpg")
+# Making the user choose the image to convert
+choice = st.selectbox("Images:",["a.jpg"])
+img = Image.open(choice)
 st.image(img)
+
 
 
 
