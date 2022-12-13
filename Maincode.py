@@ -41,9 +41,9 @@ I=cv2.imread(choice);
 if(I.ndim==3):
     I= cv2.cvtColor(I, cv2.COLOR_RGB2GRAY) # Grayscale conversion of image
 
-with row2_2:
-    st.write("**Chosen Image in Black and White**")
-    st.image(I,width=300);
+# with row2_2:
+#     st.write("**Chosen Image in Black and White**")
+#     st.image(I,width=300);
 
 #Rescaling the image
 
@@ -71,7 +71,7 @@ I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
 
 st.sidebar.write("Obtained threshold: ", otsu_threshold)
 
-with row2_3:
+with row2_2:
     st.write("**Image After Thresholding Operation**")
     st.image(I_thres,width =300)
 #     st.write("Obtained threshold: ", otsu_threshold)
@@ -91,8 +91,8 @@ I_dilated = cv2.dilate(I_eroded,kernel,iterations = 1);
 I_dilated = 255 - I_dilated;
 
 
-row3_1, row3_2, row3_3 = st.columns((1, 1, 1))
-with row3_1:
+
+with row2_3:
     st.write("**Image After Dialation and Erosion**")
     st.image(I_dilated,width=300);
 
@@ -113,10 +113,10 @@ print(I_dilated.shape);
 I_dilated[dest > 0.01 * dest.max()]= 0;
 
 
-
+row3_1, row3_2, row3_3 = st.columns((1, 1, 1))
 
 # the window showing output image with corners
-with row3_2:
+with row3_1:
     st.write("**Image After Harris Corner Detection**")
     st.image(I_dilated,width = 300);
 
@@ -190,8 +190,9 @@ for i in range(0,(len(contours))):
       cv2.line(image1,left,right, [0,0,0], 3);
       Line.append((left,right));
 
-
-# st.image(image1)
+with row3_2:
+    st.write("**Digital Image Without Vertices**")
+    st.image(image1)
 
 #############################################################################
 from itertools import combinations 
