@@ -41,7 +41,7 @@ st.image(re_I);
 
 slider1 = st.select_slider("Blur Kernel Size",options=["1","3","5","7","9","11","13","15"])
 st.write(slider1)
-I_blur = cv2.medianBlur(re_I,5)
+I_blur = cv2.medianBlur(re_I,slider1)
          
 otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
