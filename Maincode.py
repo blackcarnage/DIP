@@ -16,7 +16,7 @@ st.title("Digital Image Processing")
 st.header("End Semester Project")
 
 # Making the user choose the image to convert
-choice = st.selectbox("Images:",["a.jpg"])
+choice = st.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 img = Image.open(choice)
 st.image(img,width = 200)
 
