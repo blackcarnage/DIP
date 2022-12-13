@@ -34,7 +34,7 @@ img = Image.open(choice)
 
 with row2_1:
     st.write("**Chosen Image**")
-    st.image(img,width = 250)
+    st.image(img,width = 300)
 
 #Converting the image to grayscale
 I=cv2.imread(choice);
@@ -43,7 +43,7 @@ if(I.ndim==3):
 
 with row2_2:
     st.write("**Chosen Image in Black and White**")
-    st.image(I,width=250);
+    st.image(I,width=300);
 
 #Rescaling the image
 
@@ -73,7 +73,7 @@ st.sidebar.write("Obtained threshold: ", otsu_threshold)
 
 with row2_3:
     st.write("**Image After Thresholding Operation**")
-    st.image(I_thres,width =250)
+    st.image(I_thres,width =300)
 #     st.write("Obtained threshold: ", otsu_threshold)
 
 #Performing Erosion and Dilation
@@ -91,9 +91,10 @@ I_dilated = cv2.dilate(I_eroded,kernel,iterations = 1);
 I_dilated = 255 - I_dilated;
 
 
-with row2_1:
+row3_1, row3_2, row3_3 = st.columns((1, 1, 1))
+with row3_1:
     st.write("**Image After Dialation and Erosion**")
-    st.image(I_dilated,width=200);
+    st.image(I_dilated,width=300);
 
 
 operatedImage = np.float32(I_dilated)
@@ -112,13 +113,12 @@ print(I_dilated.shape);
 I_dilated[dest > 0.01 * dest.max()]= 0;
 
 
-row3_1, row3_2, row3_3 = st.columns((3, 1, 1))
 
 
 # the window showing output image with corners
-with row3_1:
-    st.write("**Chosen Image**")
-    st.image(I_dilated,width = 250);
+with row3_2:
+    st.write("**Image After Harris Corner Detection**")
+    st.image(I_dilated,width = 300);
 
 
 ###########################################################
@@ -131,7 +131,7 @@ contours,hierarchy = cv2.findContours(I_copy, cv2.RETR_TREE, cv2.CHAIN_APPROX_SI
 
 # st.write("Number of Contours found = ",str(len(contours)))
 st.sidebar.write("Number of Contours found = ",str(len(contours)))
-st.image(I_copy)
+# st.image(I_copy)
 
 image1 = np.zeros((I_copy.shape));
 #We change the image into a white background by setting all intensity values as 255
@@ -265,8 +265,9 @@ for index in val:
 
   
 
-
-st.image(image1)
+with row3_2:
+    st.write("**Final Image**")
+    st.image(image1)
 
 
 
