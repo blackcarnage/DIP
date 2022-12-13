@@ -82,7 +82,7 @@ kernel = np.ones((7,7),np.uint8);
 
 # Firstly we erode the image, which increases the thickness of the black line
 I_eroded = cv2.erode(I_thres,kernel,iterations = 1);
-plt.imshow(I_eroded,cmap = 'gray');
+#plt.imshow(I_eroded,cmap = 'gray');
 # st.image(I_eroded,width=200);
 
 I_dilated = cv2.dilate(I_eroded,kernel,iterations = 1);
@@ -142,7 +142,8 @@ for i in range(0,I_copy.shape[0]):
 
 
 colour = {"Red":[255,0,0],"Blue":[0,0,255],"Green":[0,255,0],"Black":[0,0,0]}
-col = colour[slider2]
+col = [1,0,0]
+st.write(col)
 
 #Storing all the line endpoints in a tuple
 Line = [];
