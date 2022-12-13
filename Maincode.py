@@ -142,7 +142,7 @@ for i in range(0,I_copy.shape[0]):
 
 
 colour = {"Red":[255/255,0,0],"Blue":[0,0,255/255],"Green":[0,255/255,0],"Black":[0,0,0]}
-col = colour[slider2]
+col = [colour[slider2][0],colour[slider2][1],colour[slider2][2]]
 st.write(col)
 #Storing all the line endpoints in a tuple
 Line = [];
