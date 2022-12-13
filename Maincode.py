@@ -141,7 +141,7 @@ for i in range(0,I_copy.shape[0]):
     image1[i,j] = 1;
 
 
-colour = {"Red":[1,0,0],"Blue":[0,0,1],"Green":[0,1,0],"Black":[0,0,0]}
+colour = {"Red":[1.0,0,0],"Blue":[0,0,1.0],"Green":[0,1.0,0],"Black":[0,0,0]}
 col = colour[slider2]
 #Storing all the line endpoints in a tuple
 Line = [];
