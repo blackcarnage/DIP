@@ -1,7 +1,6 @@
-# DIP
-keras==2.9.0
 numpy==1.23.1
 opencv-python-headless==4.6.0.66
-Pillow==9.2.0
 streamlit==1.11.1
-tensorflow==2.9.1
+matplotlib==3.2.2
+scipy==1.2.3
+
