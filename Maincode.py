@@ -26,7 +26,7 @@ st.sidebar.write("""#### Output Values""")
 
 
 # Making the user choose the image to convert
-row2_1, row2_2, row2_3 = st.columns((2, 1, 1))
+row2_1, row2_2, row2_3 = st.columns((1, 1, 1))
 
 
 
