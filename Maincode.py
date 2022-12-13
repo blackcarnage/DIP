@@ -23,7 +23,7 @@ slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","
 
 
 # Making the user choose the image to convert
-choice = st.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
+choice = st.sidebar.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 img = Image.open(choice)
 st.image(img,width = 200)
 
