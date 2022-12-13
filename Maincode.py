@@ -17,7 +17,7 @@ st.header("End Semester Project")
 
 st.sidebar.write("""#### Choose your Parameters""")
 choice = st.sidebar.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
-slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.15","0.2","0.25","0.3","0.35","0.4","0.45","0.5","0.55","0.6","0.65","0.7","0.75","0.8","0.85","0.9,"0.95""])
+slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.15","0.2","0.25","0.3","0.35","0.4","0.45","0.5","0.55","0.6","0.65","0.7","0.75","0.8","0.85","0.9","0.95"])
 slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
 slider2 = st.sidebar.selectbox("Digital Image Colour:",["Red","Blue","Green","Black"])
 
