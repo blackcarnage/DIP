@@ -40,7 +40,8 @@ st.image(re_I);
 # Helps in the smoothning out of the background lines
 
 slider1 = st.slider("Blur Kernel Size",1, 15,(1,15),2)
-I_blur = cv2.medianBlur(re_I,int(slider1))
+st.write(slider1)
+I_blur = cv2.medianBlur(re_I,5)
          
 otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
