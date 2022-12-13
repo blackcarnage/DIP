@@ -20,11 +20,13 @@ choice = st.sidebar.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
 slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
 
-
+st.sidebar.write("""#### Output Values""")
+st.sidebar.write("Obtained threshold: ", otsu_threshold)
+st.sidebar.write("Number of Contours found = ",str(len(contours)))
 
 
 # Making the user choose the image to convert
-row2_1, row2_2, row2_3, row2_4 = st.columns((2, 1, 1, 1 ))
+row2_1, row2_2, row2_3 = st.columns((2, 1, 1))
 
 
 
@@ -72,7 +74,7 @@ I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
 with row2_3:
     st.write("**Image After Thresholding Operation**")
     st.image(I_thres,width =250)
-    st.write("Obtained threshold: ", otsu_threshold)
+#     st.write("Obtained threshold: ", otsu_threshold)
 
 #Performing Erosion and Dilation
 kernel = np.ones((7,7),np.uint8);
@@ -109,10 +111,14 @@ print(I_dilated.shape);
 # with optimal threshold value
 I_dilated[dest > 0.01 * dest.max()]= 0;
 
+
+row3_1, row3_2, row3_3 = st.columns((3, 1, 1))
+
+
 # the window showing output image with corners
-with row2_4:
+with row3_1:
     st.write("**Chosen Image**")
-    st.image(I_dilated,width = 200);
+    st.image(I_dilated,width = 250);
 
 
 ###########################################################
@@ -123,7 +129,7 @@ I_copy = cv2.medianBlur(I_copy,5);
 contours,hierarchy = cv2.findContours(I_copy, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE);
 
 
-st.write("Number of Contours found = ",str(len(contours)))
+# st.write("Number of Contours found = ",str(len(contours)))
 
 st.image(I_copy)
 
