@@ -24,21 +24,24 @@ slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","
 
 
 # Making the user choose the image to convert
-row2_1, row2_2, row2_3, row2_4 = st.columns((2, 1, 1, 1))
+row2_1, row2_2, row2_3, row2_4 = st.columns((2, 1, 1, 1 ))
 
 
 
 img = Image.open(choice)
-st.image(img,width = 200)
+
+with row2_1:
+    st.write("**Chosen Image**")
+    st.image(img,width = 250)
 
 #Converting the image to grayscale
 I=cv2.imread(choice);
 if(I.ndim==3):
     I= cv2.cvtColor(I, cv2.COLOR_RGB2GRAY) # Grayscale conversion of image
 
-with row2_1:
-    st.write("**Chosen Image**")
-    st.image(I,width=200);
+with row2_2:
+    st.write("**Chosen Image in Black and White**")
+    st.image(I,width=250);
 
 #Rescaling the image
 
@@ -63,12 +66,13 @@ I_blur = cv2.medianBlur(re_I,int(slider1))
 otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
 )
-st.write("Obtained threshold: ", otsu_threshold)
 
 
-with row2_2:
+
+with row2_3:
     st.write("**Image After Thresholding Operation**")
-    st.image(I_thres,width =200)
+    st.image(I_thres,width =250)
+    st.write("Obtained threshold: ", otsu_threshold)
 
 #Performing Erosion and Dilation
 kernel = np.ones((7,7),np.uint8);
