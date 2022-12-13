@@ -72,9 +72,8 @@ operatedImage = np.float32(I_dilated)
 # to detect the corners with appropriate
 # values as input parameters
 
-val = st.text_input("Enter parameter")
 
-dest = cv2.cornerHarris(operatedImage, 10,25, int(val))
+dest = cv2.cornerHarris(operatedImage, 20,25,0.07)
 # Results are marked through the dilated corners
 dest = cv2.dilate(dest, None)
 print(I_dilated.shape);
