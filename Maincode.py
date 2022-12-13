@@ -103,7 +103,7 @@ for i in range(0,I_copy.shape[0]):
     image1[i,j] = 1;
 
 
-st.image(image1)
+
 #Storing all the line endpoints in a tuple
 Line = [];
 i = 1;
@@ -152,6 +152,81 @@ for i in range(0,(len(contours))):
       right = tuple(contour[contour[:,:,0].argmax()][0])
       cv2.line(image1,left,right, [0,0,0], 3);
       Line.append((left,right));
+
+
+st.image(image1)
+
+#############################################################################
+from itertools import combinations 
+from numpy import inf
+#finding all possible combinations of endpoints
+val = combinations(Line, 2) ;
+x = np.zeros(4);
+y = np.zeros(4);
+for index in val:
+    
+    #Line 1
+  
+    x[0] = index[1][0][0];
+    y[0] = index[1][0][1];
+
+    x[1] = index[1][1][0];
+    y[1] = index[1][1][1];
+
+    #Line 2  
+    x[2] = index[0][0][0];
+    y[2] = index[0][0][1];
+
+    x[3] = index[0][1][0];
+    y[3] = index[0][1][1];
+
+    d1 = ((x[1] - x[2])**2 + (y[1] - y[2])**2)**0.5;
+    d0 = ((x[0] - x[2])**2 + (y[0] - y[2])**2)**0.5;
+
+    d3 = ((x[1] - x[3])**2 + (y[1] - y[3])**2)**0.5;
+    d2 = ((x[0] - x[3])**2 + (y[0] - y[3])**2)**0.5;
+    
+    # when lines intersect
+    if( d1<40 or d2< 40 or d3 <40 or d0 <40):
+      A1 = y[3] - y[2];
+      B1 = x[2] - x[3];
+      C1 = A1*x[2] + B1*y[2];
+
+      A2 = y[1] - y[0];
+      B2 = x[0] - x[1];
+      C2 = A2*x[0] + B2*y[0];
+      
+      Dx =  B2*C1 - B1*C2;
+      Dy = A1*C2 - A2*C1;
+
+      D = A1*B2 - A2*B1;
+      
+      x_m = (Dx/D);
+      y_m = (Dy/D);
+      if(x_m != inf and y_m != inf and x_m>0 and y_m>0):
+        x_m = int(Dx/D);
+        y_m = int(Dy/D);
+
+        if(d0<40):
+          a = (int(x[0]),int(y[0]));
+          b = (int(x[2]),int(y[2]));
+      
+        elif(d1<40):
+          a = (int(x[1]),int(y[1]));
+          b = (int(x[2]),int(y[2]));
+        elif(d2<40):
+          a = (int(x[0]),int(y[0]));
+          b = (int(x[3]),int(y[3]));
+        else:
+          a = (int(x[1]),int(y[1]));
+          b = (int(x[3]),int(y[3]));
+      
+      
+        print(x_m,y_m);
+        cv2.line(image1,a,(x_m,y_m), [0,0,0], 3);
+        cv2.line(image1,b,(x_m,y_m), [0,0,0], 3);
+
+  
 
 
 st.image(image1)
