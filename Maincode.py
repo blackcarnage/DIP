@@ -30,8 +30,6 @@ def user_input_features():
 df_user = user_input_features()
 
 
-
-
 # Making the user choose the image to convert
 choice = st.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 img = Image.open(choice)
@@ -49,8 +47,8 @@ st.image(I,width=200);
 # st.write(slider0)
 
 
-scale_factor = float(slider0);
-# scale_factor = 0.2;
+scale_factor = slider0;
+# scale_factor = df_user['SG Total'];
 W = int(I.shape[1]*scale_factor);
 H = int(I.shape[0]*scale_factor);
 dimensions = (W,H);
@@ -63,7 +61,7 @@ st.image(re_I,width=200);
 
 # slider1 = st.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
 # st.write(slider1)
-I_blur = cv2.medianBlur(re_I,int(slider1))
+I_blur = cv2.medianBlur(re_I,df_user['slider1'])
          
 otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
