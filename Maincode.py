@@ -15,6 +15,14 @@ import scipy
 st.title("Digital Image Processing")
 st.header("End Semester Project")
 
+st.sidebar.write("""#### Choose your SG bias""")
+
+slider0 = st.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
+st.write(slider0)
+
+
+
+
 # Making the user choose the image to convert
 choice = st.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 img = Image.open(choice)
@@ -28,8 +36,8 @@ st.image(I,width=200);
 
 #Rescaling the image
 
-slider0 = st.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
-st.write(slider0)
+# slider0 = st.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
+# st.write(slider0)
 
 
 scale_factor = float(slider0);
