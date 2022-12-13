@@ -142,8 +142,8 @@ for i in range(0,I_copy.shape[0]):
 
 
 colour = {"Red":[255/255,0,0],"Blue":[0,0,255/255],"Green":[0,255/255,0],"Black":[0,0,0]}
-col = [colour[slider2][0],colour[slider2][1],colour[slider2][2]]
-st.write(col)
+col = colour[slider2]
+
 #Storing all the line endpoints in a tuple
 Line = [];
 i = 1;
@@ -195,7 +195,7 @@ for i in range(0,(len(contours))):
 
 with row3_2:
     st.write("**Digital Image Without Vertices**")
-    st.image(image1,width = 300)
+    st.image(image1,width = 300,channels="RGB")
 
 #############################################################################
 from itertools import combinations 
@@ -271,7 +271,7 @@ for index in val:
 
 with row3_3:
     st.write("**Final Image**")
-    st.image(image1,width = 300)
+    st.image(image1,width = 300,channels="RGB")
 
 
 
