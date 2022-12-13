@@ -2,9 +2,9 @@ import streamlit as st
 from PIL import Image
 
 import cv2 
-import matplotlib
+import matplotlib.pyplot as plt
 import os
-import numpy
+import numpy as np
 #from scipy.interpolate import griddata
 import scipy
 #from google.colab.patches import cv2_imshow
