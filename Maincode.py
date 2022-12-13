@@ -96,12 +96,11 @@ st.write("Number of Contours found = ",str(len(contours)))
 
 st.image(I_copy)
 
-image = np.zeros((I_copy.shape));
-print((I_copy.shape));
+image1 = np.zeros((I_copy.shape));
 #We change the image into a white background by setting all intensity values as 255
 for i in range(0,I_copy.shape[0]):
   for j in range(0,I_copy.shape[1]):
-    image[i,j] = 255;
+    image1[i,j] = 255;
 
 
 
@@ -123,7 +122,7 @@ for i in range(0,(len(contours))):
       ratio = major_axis_diameter/minor_axis_diameter;
     else:
       ratio = 10;
-    print(ratio);
+    
     #CASE: When we have a line segment
     if(ratio > 3):
       #Finding the endpoints of the line after checking if it is horizontal or vertical
@@ -131,31 +130,31 @@ for i in range(0,(len(contours))):
       if(rotation_angle < 45):
         top = tuple(contour[contour[:,:,1].argmin()][0])
         bottom = tuple(contour[contour[:,:,1].argmax()][0])
-        cv2.line(image,top,bottom, [0,0,0], 3); 
+        cv2.line(image1,top,bottom, [0,0,0], 3); 
         Line.append((top,bottom));
       else:
         left = tuple(contour[contour[:,:,0].argmin()][0])
         right = tuple(contour[contour[:,:,0].argmax()][0])
-        cv2.line(image,left,right, [0,0,0], 3);
+        cv2.line(image1,left,right, [0,0,0], 3);
         Line.append((left,right));
 
     elif(ratio > 0 and ratio <=3):
-      cv2.ellipse(image,ellipse,[0,0,0],3);
+      cv2.ellipse(image1,ellipse,[0,0,0],3);
 
   if (len(contour) < 5 and len(contour) >=2):
     if(rotation_angle < 45):
       top = tuple(contour[contour[:,:,1].argmin()][0])
       bottom = tuple(contour[contour[:,:,1].argmax()][0])
-      cv2.line(image,top,bottom, [0,0,0], 3); 
+      cv2.line(image1,top,bottom, [0,0,0], 3); 
       Line.append((top,bottom));
     else:
       left = tuple(contour[contour[:,:,0].argmin()][0])
       right = tuple(contour[contour[:,:,0].argmax()][0])
-      cv2.line(image,left,right, [0,0,0], 3);
+      cv2.line(image1,left,right, [0,0,0], 3);
       Line.append((left,right));
 
 
-st.image(image)
+st.image(image1)
 
 
 
