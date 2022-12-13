@@ -47,8 +47,8 @@ st.image(I,width=200);
 # st.write(slider0)
 
 
-scale_factor = slider0;
-# scale_factor = df_user['SG Total'];
+scale_factor = df_user['slider0'];
+# scale_factor = ;
 W = int(I.shape[1]*scale_factor);
 H = int(I.shape[0]*scale_factor);
 dimensions = (W,H);
