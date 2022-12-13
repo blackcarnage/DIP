@@ -9,7 +9,7 @@ import numpy as np
 import scipy
 #from google.colab.patches import cv2_imshow
 
-
+st.set_page_config(layout="wide")
 
 #App headings
 st.title("Digital Image Processing")
