@@ -19,7 +19,7 @@ st.sidebar.write("""#### Choose your Parameters""")
 choice = st.sidebar.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
 slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
-slider2 = st.sidebar.select_slider("Digital Image Colour",options=["Red","Blue","Green","Black"])
+slider2 = st.sidebar.selectbox("Digital Image Colour:",["Red","Blue","Green","Black"])
 
 st.sidebar.write("""#### Output Values""")
 
@@ -141,7 +141,7 @@ for i in range(0,I_copy.shape[0]):
     image1[i,j] = 1;
 
 
-colour = {"Red":[255,0,0],"Blue":[0,0,255],"Green":[0,255,0],"Black":[0,0,0]}
+colour = {"Red":[1,0,0],"Blue":[0,0,1],"Green":[0,1,0],"Black":[0,0,0]}
 col = colour[slider2]
 #Storing all the line endpoints in a tuple
 Line = [];
