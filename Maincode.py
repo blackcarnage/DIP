@@ -15,10 +15,19 @@ import scipy
 st.title("Digital Image Processing")
 st.header("End Semester Project")
 
-st.sidebar.write("""#### Choose your SG bias""")
+st.sidebar.write("""#### Choose your Parameters""")
+def user_input_features():
+    slider0 = st.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
+    slider1 = st.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
+    
 
-slider0 = st.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
-st.write(slider0)
+
+    user_data = {'slider1': slider0,
+                 'slider1': slider1}
+    features = pd.DataFrame(user_data, index=[0])
+    return features
+
+df_user = user_input_features()
 
 
 
@@ -52,8 +61,8 @@ st.image(re_I,width=200);
 
 # Helps in the smoothning out of the background lines
 
-slider1 = st.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
-st.write(slider1)
+# slider1 = st.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
+# st.write(slider1)
 I_blur = cv2.medianBlur(re_I,int(slider1))
          
 otsu_threshold, I_thres  = cv2.threshold(
