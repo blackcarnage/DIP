@@ -141,7 +141,7 @@ for i in range(0,(len(contours))):
     elif(ratio > 0 and ratio <=3):
       cv2.ellipse(image1,ellipse,[0,0,0],3);
 
-  if (len(contour) < 5 and len(contour) >=2):
+  if (len(contour) < 5 and len(contour) >5):
     if(rotation_angle < 45):
       top = tuple(contour[contour[:,:,1].argmin()][0])
       bottom = tuple(contour[contour[:,:,1].argmax()][0])
