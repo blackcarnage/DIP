@@ -16,6 +16,7 @@ st.title("Digital Image Processing")
 st.header("End Semester Project")
 
 st.sidebar.write("""#### Choose your Parameters""")
+choice = st.sidebar.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
 slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
 
@@ -23,7 +24,7 @@ slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","
 
 
 # Making the user choose the image to convert
-choice = st.sidebar.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
+
 img = Image.open(choice)
 st.image(img,width = 200)
 
