@@ -22,8 +22,8 @@ def user_input_features():
     
 
 
-    user_data = {'slider0': slider0,
-                 'slider1': slider1}
+    user_data = {'s0': slider0,
+                 's1': slider1}
     features = pd.DataFrame(user_data, index=[0])
     return features
 
@@ -47,7 +47,7 @@ st.image(I,width=200);
 # st.write(slider0)
 
 
-scale_factor = df_user['slider0'];
+scale_factor = df_user['s0'][0];
 # scale_factor = ;
 W = int(I.shape[1]*scale_factor);
 H = int(I.shape[0]*scale_factor);
@@ -61,7 +61,7 @@ st.image(re_I,width=200);
 
 # slider1 = st.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
 # st.write(slider1)
-I_blur = cv2.medianBlur(re_I,df_user['slider1'])
+I_blur = cv2.medianBlur(re_I,df_user['s1'][0])
          
 otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
