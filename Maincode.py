@@ -19,6 +19,7 @@ st.sidebar.write("""#### Choose your Parameters""")
 choice = st.sidebar.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
 slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
+slider2 = st.sidebar.select_slider("Digital Image Colour",options=["Red","Blue","Green","Black"])
 
 st.sidebar.write("""#### Output Values""")
 
@@ -140,7 +141,8 @@ for i in range(0,I_copy.shape[0]):
     image1[i,j] = 1;
 
 
-
+colour = {"Red":[255,0,0],"Blue":[0,0,255],"Green":[0,255,0],"Black":[0,0,0]}
+col = colour[slider2]
 #Storing all the line endpoints in a tuple
 Line = [];
 i = 1;
@@ -167,27 +169,27 @@ for i in range(0,(len(contours))):
       if(rotation_angle < 45):
         top = tuple(contour[contour[:,:,1].argmin()][0])
         bottom = tuple(contour[contour[:,:,1].argmax()][0])
-        cv2.line(image1,top,bottom, [0,0,0], 3); 
+        cv2.line(image1,top,bottom, col, 3); 
         Line.append((top,bottom));
       else:
         left = tuple(contour[contour[:,:,0].argmin()][0])
         right = tuple(contour[contour[:,:,0].argmax()][0])
-        cv2.line(image1,left,right, [0,0,0], 3);
+        cv2.line(image1,left,right,col, 3);
         Line.append((left,right));
 
     elif(ratio > 0 and ratio <=3):
-      cv2.ellipse(image1,ellipse,[0,0,0],3);
+      cv2.ellipse(image1,ellipse,col,3);
 
   if (len(contour) < 5 and len(contour) >5):
     if(rotation_angle < 45):
       top = tuple(contour[contour[:,:,1].argmin()][0])
       bottom = tuple(contour[contour[:,:,1].argmax()][0])
-      cv2.line(image1,top,bottom, [0,0,0], 3); 
+      cv2.line(image1,top,bottom,col, 3); 
       Line.append((top,bottom));
     else:
       left = tuple(contour[contour[:,:,0].argmin()][0])
       right = tuple(contour[contour[:,:,0].argmax()][0])
-      cv2.line(image1,left,right, [0,0,0], 3);
+      cv2.line(image1,left,right, col, 3);
       Line.append((left,right));
 
 with row3_2:
@@ -261,8 +263,8 @@ for index in val:
       
       
         print(x_m,y_m);
-        cv2.line(image1,a,(x_m,y_m), [0,0,0], 3);
-        cv2.line(image1,b,(x_m,y_m), [0,0,0], 3);
+        cv2.line(image1,a,(x_m,y_m), col, 3);
+        cv2.line(image1,b,(x_m,y_m), col, 3);
 
   
 
