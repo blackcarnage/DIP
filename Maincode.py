@@ -27,7 +27,7 @@ if(I.ndim==3):
 st.image(I,width=200);
 
 #Rescaling the image
-scale_factor = 0.5;
+scale_factor = 0.2;
 # scale_factor = 0.2;
 W = int(I.shape[1]*scale_factor);
 H = int(I.shape[0]*scale_factor);
