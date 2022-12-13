@@ -18,7 +18,7 @@ st.header("End Semester Project")
 # Making the user choose the image to convert
 choice = st.selectbox("Images:",["a.jpg"])
 img = Image.open(choice)
-st.image(img)
+st.image(img,width = 200)
 
 #Converting the image to grayscale
 I=cv2.imread(choice);
@@ -66,8 +66,96 @@ I_dilated = 255 - I_dilated;
 st.image(I_dilated,width=200);
 
 
+operatedImage = np.float32(I_dilated)
+
+# apply the cv2.cornerHarris method
+# to detect the corners with appropriate
+# values as input parameters
+
+dest = cv2.cornerHarris(operatedImage, 10,25, 0.07)
+# Results are marked through the dilated corners
+dest = cv2.dilate(dest, None)
+print(I_dilated.shape);
+# Reverting back to the original image,
+# with optimal threshold value
+I_dilated[dest > 0.01 * dest.max()]= 0;
+
+# the window showing output image with corners
+st.image(I_dilated,width = 200);
 
 
+###########################################################
+I_copy = I_dilated.copy();
+I_copy = cv2.medianBlur(I_copy,5);
+
+
+contours,hierarchy = cv2.findContours(I_copy, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE);
+
+
+st.write("Number of Contours found = ",str(len(contours)))
+
+st.image(I_copy)
+
+image = np.zeros((I_copy.shape));
+print((I_copy.shape));
+#We change the image into a white background by setting all intensity values as 255
+for i in range(0,I_copy.shape[0]):
+  for j in range(0,I_copy.shape[1]):
+    image[i,j] = 255;
+
+
+
+#Storing all the line endpoints in a tuple
+Line = [];
+i = 1;
+#Fitting an ellipse on the contours which form the image and disregarding the unrequired ones
+for i in range(0,(len(contours))):
+
+  contour = contours[i]
+  
+  if len(contour) >= 5:
+    ellipse = cv2.fitEllipse(contour);
+    i = i+1;
+    print(i);
+
+    (x_centre,y_centre),(minor_axis_diameter,major_axis_diameter),rotation_angle = ellipse;
+    if(minor_axis_diameter != 0):
+      ratio = major_axis_diameter/minor_axis_diameter;
+    else:
+      ratio = 10;
+    print(ratio);
+    #CASE: When we have a line segment
+    if(ratio > 3):
+      #Finding the endpoints of the line after checking if it is horizontal or vertical
+      #Case 1: When the line is vertical inclined
+      if(rotation_angle < 45):
+        top = tuple(contour[contour[:,:,1].argmin()][0])
+        bottom = tuple(contour[contour[:,:,1].argmax()][0])
+        cv2.line(image,top,bottom, [0,0,0], 3); 
+        Line.append((top,bottom));
+      else:
+        left = tuple(contour[contour[:,:,0].argmin()][0])
+        right = tuple(contour[contour[:,:,0].argmax()][0])
+        cv2.line(image,left,right, [0,0,0], 3);
+        Line.append((left,right));
+
+    elif(ratio > 0 and ratio <=3):
+      cv2.ellipse(image,ellipse,[0,0,0],3);
+
+  if (len(contour) < 5 and len(contour) >=2):
+    if(rotation_angle < 45):
+      top = tuple(contour[contour[:,:,1].argmin()][0])
+      bottom = tuple(contour[contour[:,:,1].argmax()][0])
+      cv2.line(image,top,bottom, [0,0,0], 3); 
+      Line.append((top,bottom));
+    else:
+      left = tuple(contour[contour[:,:,0].argmin()][0])
+      right = tuple(contour[contour[:,:,0].argmax()][0])
+      cv2.line(image,left,right, [0,0,0], 3);
+      Line.append((left,right));
+
+
+st.image(image)
 
 
 
