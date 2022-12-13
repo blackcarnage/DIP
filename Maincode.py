@@ -17,8 +17,8 @@ st.header("End Semester Project")
 
 st.sidebar.write("""#### Choose your Parameters""")
 def user_input_features():
-    slider0 = st.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
-    slider1 = st.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
+    slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
+    slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
     
 
 
