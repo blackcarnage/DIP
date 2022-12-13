@@ -24,6 +24,9 @@ slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","
 
 
 # Making the user choose the image to convert
+row2_1, row2_2, row2_3, row2_4 = st.columns((2, 1, 1, 1))
+
+
 
 img = Image.open(choice)
 st.image(img,width = 200)
@@ -32,7 +35,10 @@ st.image(img,width = 200)
 I=cv2.imread(choice);
 if(I.ndim==3):
     I= cv2.cvtColor(I, cv2.COLOR_RGB2GRAY) # Grayscale conversion of image
-st.image(I,width=200);
+
+with row2_1:
+    st.write("**Chosen Image**")
+    st.image(I,width=200);
 
 #Rescaling the image
 
@@ -47,7 +53,7 @@ dimensions = (W,H);
 print(dimensions);
 re_I = cv2.resize(I,dimensions,interpolation = cv2.INTER_AREA);
 
-st.image(re_I,width=200);
+# st.image(re_I,width=200);
 
 # Helps in the smoothning out of the background lines
 
@@ -59,7 +65,10 @@ I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
 )
 st.write("Obtained threshold: ", otsu_threshold)
 
-st.image(I_thres,width =200)
+
+with row2_2:
+    st.write("**Image After Thresholding Operation**")
+    st.image(I_thres,width =200)
 
 #Performing Erosion and Dilation
 kernel = np.ones((7,7),np.uint8);
@@ -67,14 +76,18 @@ kernel = np.ones((7,7),np.uint8);
 # Firstly we erode the image, which increases the thickness of the black line
 I_eroded = cv2.erode(I_thres,kernel,iterations = 1);
 plt.imshow(I_eroded,cmap = 'gray');
-st.image(I_eroded,width=200);
+# st.image(I_eroded,width=200);
 
 I_dilated = cv2.dilate(I_eroded,kernel,iterations = 1);
-st.image(I_dilated,width = 200);
+# st.image(I_dilated,width = 200);
 
 #Conversion to Black and white
 I_dilated = 255 - I_dilated;
-st.image(I_dilated,width=200);
+
+
+with row2_1:
+    st.write("**Image After Dialation and Erosion**")
+    st.image(I_dilated,width=200);
 
 
 operatedImage = np.float32(I_dilated)
@@ -93,7 +106,9 @@ print(I_dilated.shape);
 I_dilated[dest > 0.01 * dest.max()]= 0;
 
 # the window showing output image with corners
-st.image(I_dilated,width = 200);
+with row2_4:
+    st.write("**Chosen Image**")
+    st.image(I_dilated,width = 200);
 
 
 ###########################################################
