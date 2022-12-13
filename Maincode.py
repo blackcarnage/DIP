@@ -24,9 +24,7 @@ st.image(img)
 I=cv2.imread(choice);
 if(I.ndim==3):
     I= cv2.cvtColor(I, cv2.COLOR_RGB2GRAY) # Grayscale conversion of image
-a = plt.imshow(I,cmap = 'gray');
-st.pyplot(a)
-
+st.image(I,cmap = "gray");
 
 
 
