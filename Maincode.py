@@ -15,8 +15,7 @@ import scipy
 st.title("Digital Image Processing")
 st.header("End Semester Project")
 
-img = Image.open("a.jpg");
-st.image(img);
+
 
 
 
