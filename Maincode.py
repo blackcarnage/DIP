@@ -72,7 +72,17 @@ operatedImage = np.float32(I_dilated)
 # to detect the corners with appropriate
 # values as input parameters
 
-dest = cv2.cornerHarris(operatedImage, 10,25, 0.07)
+name = st.text_input("Enter Your name", "Type Here ...")
+ 
+# display the name when the submit button is clicked
+# .title() is used to get the input text string
+if(st.button('Submit')):
+    result = name.title()
+    st.success(result)
+
+val = st.text_input("Enter parameter")
+
+dest = cv2.cornerHarris(operatedImage, 10,25, int(val))
 # Results are marked through the dilated corners
 dest = cv2.dilate(dest, None)
 print(I_dilated.shape);
