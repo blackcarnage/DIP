@@ -38,8 +38,8 @@ re_I = cv2.resize(I,dimensions,interpolation = cv2.INTER_AREA);
 st.image(re_I);
 
 # Helps in the smoothning out of the background lines
-level = st.slider("Select the level", 1, 15,(1,15),2)
-slider1 = st.slider("Blur Kernel Size",
+
+slider1 = st.slider("Blur Kernel Size",1, 15,(1,15),2)
 I_blur = cv2.medianBlur(re_I,slider1) 
          
 otsu_threshold, I_thres  = cv2.threshold(
