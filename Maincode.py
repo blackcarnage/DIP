@@ -134,7 +134,7 @@ contours,hierarchy = cv2.findContours(I_copy, cv2.RETR_TREE, cv2.CHAIN_APPROX_SI
 st.sidebar.write("Number of Contours found = ",str(len(contours)))
 # st.image(I_copy)
 
-image1 = np.zeros((I_copy.shape,3));
+image1 = np.zeros((I_copy.shape[0],I_copy.shape[1],3));
 #We change the image into a white background by setting all intensity values as 255
 for i in range(0,I_copy.shape[0]):
   for j in range(0,I_copy.shape[1]):
