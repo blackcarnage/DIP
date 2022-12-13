@@ -22,7 +22,7 @@ def user_input_features():
     
 
 
-    user_data = {'slider1': slider0,
+    user_data = {'slider0': slider0,
                  'slider1': slider1}
     features = pd.DataFrame(user_data, index=[0])
     return features
