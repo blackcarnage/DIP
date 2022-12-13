@@ -100,7 +100,7 @@ image1 = np.zeros((I_copy.shape));
 #We change the image into a white background by setting all intensity values as 255
 for i in range(0,I_copy.shape[0]):
   for j in range(0,I_copy.shape[1]):
-    image1[i,j] = 255;
+    image1[i,j] = 1;
 
 
 st.image(image1)
