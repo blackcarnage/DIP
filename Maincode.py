@@ -27,7 +27,12 @@ if(I.ndim==3):
 st.image(I,width=200);
 
 #Rescaling the image
-scale_factor = 0.2;
+
+slider0 = st.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
+st.write(slider0)
+
+
+scale_factor = float(slider0);
 # scale_factor = 0.2;
 W = int(I.shape[1]*scale_factor);
 H = int(I.shape[0]*scale_factor);
