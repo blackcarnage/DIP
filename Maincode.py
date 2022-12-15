@@ -84,16 +84,13 @@ with row2_3:
 
 operatedImage = np.float32(I_dilated)
 
-# apply the cv2.cornerHarris method to detect the corners with appropriate
-# values as input parameters
-
+# Carrying out harris corner detection
 
 dest = cv2.cornerHarris(operatedImage, 20,25,0.07)
-# Results are marked through the dilated corners
+# Results are marked with dilated corners
 dest = cv2.dilate(dest, None)
 print(I_dilated.shape);
-# Reverting back to the original image,
-# with optimal threshold value
+# Going back to the original image
 I_dilated[dest > 0.01 * dest.max()]= 0;
 
 #Setting the number of columns in the particular row of the app's page
