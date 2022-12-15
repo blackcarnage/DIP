@@ -1,3 +1,5 @@
+#Dependencies
+
 import streamlit as st
 from PIL import Image
 import pandas as pd
@@ -15,22 +17,22 @@ st.set_page_config(layout="wide")
 st.title("Digital Image Processing")
 st.header("End Semester Project")
 
+#Sliders to be present in the sidebar for the USER input, where we can specify the image, resize factor of the image, blur threshold
+#and the color of the output image.
 st.sidebar.write("""#### Choose your Parameters""")
 choice = st.sidebar.selectbox("Images:",["a.jpg","b.jpg","c.jpg","d.jpg"])
 slider0 = st.sidebar.select_slider("Image Resize Factor",options=["0.1","0.15","0.2","0.25","0.3","0.35","0.4","0.45","0.5","0.55","0.6","0.65","0.7","0.75","0.8","0.85","0.9","0.95"])
 slider1 = st.sidebar.select_slider("Blur Kernel Size",options=["3","5","7","9","11","13","15"])
 slider2 = st.sidebar.selectbox("Digital Image Colour:",["Red","Blue","Green","Black"])
 
+
+
 st.sidebar.write("""#### Output Values""")
 
-
-
-
-# Making the user choose the image to convert
+#Setting the number of columns in the particular row of the app's page
 row2_1, row2_2, row2_3 = st.columns((1, 1, 1))
 
-
-
+# Making the user choose the image to convert
 img = Image.open(choice)
 
 with row2_1:
@@ -42,16 +44,7 @@ I=cv2.imread(choice);
 if(I.ndim==3):
     I= cv2.cvtColor(I, cv2.COLOR_RGB2GRAY) # Grayscale conversion of image
 
-# with row2_2:
-#     st.write("**Chosen Image in Black and White**")
-#     st.image(I,width=300);
-
-#Rescaling the image
-
-# slider0 = st.select_slider("Image Resize Factor",options=["0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"])
-# st.write(slider0)
-
-
+#Rescaling Image based on the USER input
 scale_factor = float(slider0);
 W = int(I.shape[1]*scale_factor);
 H = int(I.shape[0]*scale_factor);
@@ -59,13 +52,11 @@ dimensions = (W,H);
 print(dimensions);
 re_I = cv2.resize(I,dimensions,interpolation = cv2.INTER_AREA);
 
-# st.image(re_I,width=200);
 
-# Helps in the smoothning out of the background lines
-
-
+# Helps in the smoothning out of the background lines such as the stripped lines of a ruled paper
 I_blur = cv2.medianBlur(re_I,int(slider1))
-         
+
+# Finding the global threshold using Otsu's Threshold principle
 otsu_threshold, I_thres  = cv2.threshold(
 I_blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU,
 )
@@ -75,33 +66,25 @@ st.sidebar.write("Obtained threshold: ", otsu_threshold)
 with row2_2:
     st.write("**Image After Thresholding Operation**")
     st.image(I_thres,width =300)
-#     st.write("Obtained threshold: ", otsu_threshold)
 
 #Performing Erosion and Dilation
 kernel = np.ones((7,7),np.uint8);
 
 # Firstly we erode the image, which increases the thickness of the black line
 I_eroded = cv2.erode(I_thres,kernel,iterations = 1);
-#plt.imshow(I_eroded,cmap = 'gray');
-# st.image(I_eroded,width=200);
 
 I_dilated = cv2.dilate(I_eroded,kernel,iterations = 1);
-# st.image(I_dilated,width = 200);
 
 #Conversion to Black and white
 I_dilated = 255 - I_dilated;
-
-
 
 with row2_3:
     st.write("**Image After Dialation and Erosion**")
     st.image(I_dilated,width=300);
 
-
 operatedImage = np.float32(I_dilated)
 
-# apply the cv2.cornerHarris method
-# to detect the corners with appropriate
+# apply the cv2.cornerHarris method to detect the corners with appropriate
 # values as input parameters
 
 
@@ -113,7 +96,7 @@ print(I_dilated.shape);
 # with optimal threshold value
 I_dilated[dest > 0.01 * dest.max()]= 0;
 
-
+#Setting the number of columns in the particular row of the app's page
 row3_1, row3_2, row3_3 = st.columns((1, 1, 1))
 
 # the window showing output image with corners
@@ -274,16 +257,4 @@ for index in val:
 with row3_3:
     st.write("**Final Image**")
     st.image(image1,width = 300,channels="RGB",clamp = True)
-
-
-
-
-
-
-
-
-
-
-
-
 
